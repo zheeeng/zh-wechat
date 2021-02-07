@@ -7,7 +7,8 @@ import { ACCESS } from './constants';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: ACCESS.ORIGIN
+    origin: ACCESS.ORIGIN,
+    allowedHeaders: '*',
   });
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
