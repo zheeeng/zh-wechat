@@ -24,3 +24,10 @@ export const MYSQL = {
     PASSWORD: process.env.MYSQL_PASSWORD,
     DATABASE: process.env.MYSQL_DATABASE,
 }
+
+console.log('init env:', {
+  WX,
+  JWT,
+  REDIS,
+  MYSQL,
+})
