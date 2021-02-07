@@ -2,6 +2,10 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 
+export const ACCESS = {
+  ORIGIN: (process.env.ACCESS_ORIGIN || '').split('|')
+}
+
 export const WX = {
   APPID: process.env.WX_APPID,
   SECRET: process.env.WX_SECRET,
