@@ -1,5 +1,6 @@
 import { Injectable, HttpService } from '@nestjs/common';
 import * as crypto from 'crypto'
+import { WX } from 'src/constants';
 
 enum URLS {
   ACCESS_TOKEN = 'https://api.weixin.qq.com/cgi-bin/token',
@@ -11,10 +12,10 @@ export class WxService {
   constructor(private httpService: HttpService) {}
 
   private get appId () {
-    return process.env.WX_APPID
+    return WX.APPID
   }
   private get secret () {
-    return process.env.WX_SECRET
+    return WX.SECRET
   }
   private accessToken = ''
   private ticket = ''

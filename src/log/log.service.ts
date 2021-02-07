@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Between } from 'typeorm';
 import { LogRecord, Archive } from './log.entity';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class LogService {
@@ -18,6 +19,7 @@ export class LogService {
     return this.recordsRepository.insert(LogRecord.fromIp(ip, true))
   }
 
+  @Cron(CronExpression.EVERY_DAY_AT_MIDNIGHT)
   async archive() {
     const records = await this.recordsRepository.find()
     await this.archivesRepository.insert(Archive.fromRecords(records))

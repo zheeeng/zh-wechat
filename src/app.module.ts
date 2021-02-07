@@ -1,23 +1,30 @@
 import { Module } from '@nestjs/common';
 import { WxModule } from './wx/wx.module';
 import { LogModule } from './log/log.module';
+import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LogRecord, Archive } from './log/log.entity';
 import { Connection } from 'typeorm'
+import { MYSQL, JWT } from './constants';
+import { ScheduleModule } from '@nestjs/schedule';
+import { User } from './auth/auth.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: process.env.DB_TYPE as any || 'mysql',
-      host: process.env.DB_HOST || 'localhost',
-      port: +process.env.DB_PORT || 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
-      entities: [LogRecord, Archive],
+      type: MYSQL.TYPE,
+      host: MYSQL.HOST,
+      port: MYSQL.PORT,
+      username: MYSQL.USERNAME,
+      password: MYSQL.PASSWORD,
+      database: MYSQL.DATABASE,
+      entities: [LogRecord, Archive, User],
       synchronize: true,
     }),
-    WxModule, LogModule,
+    ScheduleModule.forRoot(),
+    AuthModule,
+    WxModule,
+    LogModule,
   ],
   controllers: [],
   providers: [],
