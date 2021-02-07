@@ -19,7 +19,7 @@ export class User {
   @Column()
   password: string;
 
-  @Column()
+  @Column({ default: true })
   isActive: boolean;
 
   @Column({ type: 'timestamp' })
