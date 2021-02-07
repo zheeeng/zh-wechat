@@ -9,7 +9,7 @@
     "prebuild": "rimraf dist",
     "build": "nest build",
     "prebuild:docker": "rimraf pack",
-    "build:docker": "nest build -p taconfig.docker.json && && cp package.json pack/package.json && cp Dockerfile pack/Dockerfile",
+    "build:docker": "nest build -p tsconfig.docker.json && cp package.json pack/package.json && cp Dockerfile pack/Dockerfile",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
