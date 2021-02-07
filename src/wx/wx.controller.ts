@@ -7,7 +7,7 @@ export class WxController {
   constructor(private readonly wxService: WxService) {}
 
   @Get()
-  getConfig(@Req() req: Request) {
-    return this.wxService.getConfig(req.url);
+  getConfig() {
+    return this.wxService.getConfig();
   }
 }

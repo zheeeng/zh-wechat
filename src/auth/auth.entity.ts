@@ -10,10 +10,18 @@ export class User {
     return user
   }
 
+  static fromUsernameId(id: number, userEntity: Partial<User>) {
+    const user = new User()
+    user.id = id
+    Object.assign(user, userEntity)
+
+    return user
+  }
+
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()

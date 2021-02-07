@@ -5,9 +5,11 @@ dotenv.config()
 export const WX = {
   APPID: process.env.WX_APPID,
   SECRET: process.env.WX_SECRET,
+  REFERRER: process.env.WX_REFERRER,
 }
 export const JWT = {
   SECRET: process.env.JWT_SECRET,
+  CHAPTOR: process.env.JWT_CHAPTOR || 'chaptor',
 };
 
 export const REDIS = {

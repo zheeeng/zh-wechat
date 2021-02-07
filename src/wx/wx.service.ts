@@ -23,10 +23,10 @@ export class WxService {
     return 'Hello World!';
   }
 
-  async getConfig (url: string) {
+  async getConfig () {
     return {
       appId: this.appId,
-      ...await this.signature(url),
+      ...await this.signature(WX.REFERRER),
     }
   }
 
@@ -37,6 +37,7 @@ export class WxService {
     const str = `jsapi_ticket=${jsapi_ticket}&noncestr=${nonceStr}&timestamp=${timestamp}&url=${url}`
     const sha1 = crypto.createHash('sha1');
     const signature = sha1.update(str).digest('hex');
+
     return {
         timestamp,
         nonceStr,
@@ -54,21 +55,21 @@ export class WxService {
     }
 
     const response = await this.httpService.get<{
-      errcode: string,
-      errmsg: string,
+      errcode?: number,
+      errmsg?: string,
       access_token: string,
-      expires_in: string,
+      expires_in: number,
     }>(URLS.ACCESS_TOKEN, {
       params,
     }).toPromise().then(r => r.data)
 
-    if (!response.errcode) throw new Error(response.errmsg)
+    if (response.errcode) throw new Error(response.errmsg)
 
     this.accessToken = response.access_token
 
     setTimeout(() => {
       this.accessToken = ''
-    }, parseInt(response.expires_in) * 0.5 * 1000)
+    }, response.expires_in * 0.5 * 1000)
 
     return this.accessToken
   }
@@ -76,28 +77,27 @@ export class WxService {
   private async getTicket () {
     if (this.ticket) return this.ticket
 
-
     const params = {
       type: 'jsapi',
       access_token: await this.getAccessToken(),
     }
 
     const response = await this.httpService.get<{
-      errcode: string,
-      errmsg: string,
+      errcode?: number,
+      errmsg?: string,
       ticket: string,
-      expires_in: string,
-    }>(URLS.ACCESS_TOKEN, {
+      expires_in: number,
+    }>(URLS.TICKET, {
       params,
     }).toPromise().then(r => r.data)
 
-    if (!response.errcode) throw new Error(response.errmsg)
+    if (response.errcode) throw new Error(response.errmsg)
 
     this.ticket = response.ticket
 
     setTimeout(() => {
       this.ticket = ''
-    }, parseInt(response.expires_in) * 0.5 * 1000)
+    }, response.expires_in * 0.5 * 1000)
 
     return this.ticket
   }

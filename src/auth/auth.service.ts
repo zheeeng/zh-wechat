@@ -24,6 +24,16 @@ export class AuthService {
     return this.recordsRepository.insert(user)
   }
 
+  async updatePassword(id: number, old: string, fresh: string )  {
+    const user = await this.recordsRepository.findOne({ id });
+
+    if (user && user.password === old) {
+      return this.recordsRepository.update(id, { password: fresh });
+    }
+    
+    return null;
+  }
+
   async login(user: { username: string, id: string }) {
     const payload = { username: user.username, sub: user.id };
     return {
