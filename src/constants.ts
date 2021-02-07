@@ -30,6 +30,7 @@ export const MYSQL = {
 }
 
 console.log('init env:', {
+  ACCESS,
   WX,
   JWT,
   REDIS,
