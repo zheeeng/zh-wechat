@@ -1,6 +1,6 @@
 FROM node:12
 WORKDIR /app
 ADD package.json /app/package.json
-RUN yarn install
-ADD . /app
-CMD ["yarn", "run", "start"]
+ADD dist /app/dist
+RUN yarn add
+CMD ["yarn", "run", "start:prod"]
