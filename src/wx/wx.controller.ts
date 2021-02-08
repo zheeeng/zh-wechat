@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Req } from '@nestjs/common';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { WxService } from './wx.service';
 
 @Controller('wx')
@@ -7,6 +7,7 @@ export class WxController {
 
   @Get()
   getConfig(@Query('url') url: string) {
+    if (!url) throw new BadRequestException();
     return this.wxService.getConfig(url);
   }
 }

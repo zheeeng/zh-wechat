@@ -5,7 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LogRecord, Archive } from './log/log.entity';
 import { Connection } from 'typeorm';
-import { MYSQL, JWT } from './constants';
+import { MYSQL } from './constants';
 import { ScheduleModule } from '@nestjs/schedule';
 import { User } from './auth/auth.entity';
 
