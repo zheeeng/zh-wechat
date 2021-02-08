@@ -15,10 +15,10 @@ import { JwtStrategy, LocalStrategy } from './auth.strategy';
     JwtModule.register({
       secret: JWT.SECRET,
       signOptions: { expiresIn: '10h' },
-    })
+    }),
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
-  exports: [AuthService, JwtModule]
+  exports: [AuthService, JwtModule],
 })
 export class AuthModule {}

@@ -11,7 +11,7 @@ export class CreateUserDto {
   password: string;
 
   @Equals(JWT.CHAPTOR, { message: 'MUST PROVIDE CORRECT CHAPTOR' })
-  chaptor: string
+  chaptor: string;
 }
 
 export class UpdateUserPasswordDto {

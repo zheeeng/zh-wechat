@@ -1,6 +1,6 @@
 declare interface Request {
-    user?: {
-        id: string;
-        username: string;
-    }
+  user?: {
+    id: string;
+    username: string;
+  };
 }

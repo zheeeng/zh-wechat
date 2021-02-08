@@ -18,12 +18,12 @@ export class LogController {
   @UseGuards(JwtAuthGuard)
   @Post('archive')
   archive() {
-    this.logService.archive()
+    this.logService.archive();
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('statistic')
-  getStatistic (@Query('days') days: number) {
-    return this.logService.getArchives(days)
+  getStatistic(@Query('days') days: number) {
+    return this.logService.getArchives(days);
   }
 }
